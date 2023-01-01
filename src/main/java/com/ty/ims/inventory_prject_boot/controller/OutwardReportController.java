@@ -21,15 +21,36 @@ public class OutwardReportController {
 	@Autowired
 	OutwardReportService service;
 
+	
 	@GetMapping
-//	public OutwardReport findOutwardreportbydate(
-//			@RequestParam("startdate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startdate,
-//			@RequestParam("enddate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date enddate) {
-//		return service.servicefindoutbydate(startdate, enddate);
-//	}
-
 	public ResponseEntity<ResponseStructure<OutwardReport>> findOutwardreportbydate(
 			@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
 		return service.servicefindoutbydate(date);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//public OutwardReport findOutwardreportbydate(
+//		@RequestParam("startdate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startdate,
+//		@RequestParam("enddate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date enddate) {
+//	return service.servicefindoutbydate(startdate, enddate);
+//}

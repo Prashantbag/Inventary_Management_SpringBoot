@@ -56,8 +56,8 @@ public class SupplierController {
 			@ApiResponse(code = 302, message = "found") })
 
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Supplier>> getInwardById(@RequestParam int id) {
-		return service.getInwardById(id);
+	public ResponseEntity<ResponseStructure<Supplier>> getInwardById(@RequestParam int supplierid) {
+		return service.getInwardById(supplierid);
 	}
 
 	@ApiOperation(value = "delete Inward", notes = "method used to delete Inward by id")
@@ -66,7 +66,7 @@ public class SupplierController {
 			@ApiResponse(code = 302, message = "found") })
 
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Supplier>> deleteInwardById(@PathVariable int id) {
-		return service.deleteInwardById(id);
+	public ResponseEntity<ResponseStructure<Supplier>> deleteInwardById(@PathVariable int supplierid) {
+		return service.deleteInwardById(supplierid);
 	}
 }

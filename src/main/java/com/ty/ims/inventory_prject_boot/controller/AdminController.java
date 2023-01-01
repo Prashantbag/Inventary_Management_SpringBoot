@@ -65,8 +65,8 @@ public class AdminController {
 			@ApiResponse(code = 500, message = "Internal Server Error") })
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(@RequestBody Admin admin, @RequestParam int id) {
-		return adminService.updateAdmin(admin, id);
+	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(@RequestBody Admin admin, @RequestParam int adminid) {
+		return adminService.updateAdmin(admin, adminid);
 	}
 
 	@ApiOperation(value = "Delete The Admin", notes = "Used To Delete The Admin")

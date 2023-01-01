@@ -1,8 +1,6 @@
 package com.ty.ims.inventory_prject_boot.service;
 
 import java.io.File;
-import java.util.List;
-import java.util.Optional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
