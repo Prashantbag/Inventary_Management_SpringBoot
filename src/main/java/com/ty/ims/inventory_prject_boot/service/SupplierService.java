@@ -67,6 +67,8 @@ public class SupplierService {
 					for (Item item : toBeUpdatedItems) {
 						item.setItem_id(itemid);
 						item.setItem_quantity(currentItemQuantity + item.getItem_quantity());
+						item.setItem_name(existingItem.get().getItem_name());
+						item.setItem_price(existingItem.get().getItem_price());
 						inventory.setProduct_id(inventoryid);
 						item.setInventory(inventory);
 						inwardReport.setSupplierName(supplier.getSupplierName());

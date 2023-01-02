@@ -14,7 +14,6 @@ public class EmailNotSendException extends RuntimeException {
 		this.message = message;
 	}
 	
-	
 	public EmailNotSendException() {
 	
 	}

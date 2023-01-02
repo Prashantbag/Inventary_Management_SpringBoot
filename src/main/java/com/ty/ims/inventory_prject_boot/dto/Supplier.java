@@ -13,8 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
@@ -28,9 +28,14 @@ public class Supplier {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int supplierId;
 
+	@NotNull
+	@Pattern(regexp = "^[A-Za-z]*$", message = "Use only Alphabets, Invalid Input")
 	private String supplierName;
-
+	
+	@NotNull
 	private long supplierPhoneNo;
+
+	@NotNull
 	@Column(unique = true)
 	private String supplierEmailId;
 
@@ -38,11 +43,12 @@ public class Supplier {
 
 	private int inwardQuantity;
 
-	@JsonIgnoreProperties(value = { "item_quantity" })
+	@JsonIgnoreProperties(value = { "item_quantity" }, allowSetters = true)
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(joinColumns = @JoinColumn, inverseJoinColumns = @JoinColumn)
 	private List<Item> items;
 
+	
 	public int getSupplierId() {
 		return supplierId;
 	}

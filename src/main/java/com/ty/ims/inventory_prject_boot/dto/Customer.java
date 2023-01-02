@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,9 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
@@ -27,17 +30,22 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int customerId;
 	@NotNull
+	@Pattern(regexp = "^[A-Za-z]*$", message = "Use only Alphabets, Invalid Input")
 	private String customerName;
-	@NotNull
+	
+	@Column(unique = true)
+	@Email(message = "Enter Proper Email ID")
 	private String customerEmailId;
+	
 	@NotNull
 	private long customerPhoneNo;
-	@NotNull
+	
 	private Date outwardDate;
-	@NotNull
+	
+
 	private int outwardQuantity;
 
-	@JsonIgnoreProperties(value = {"item_quantity"})
+	@JsonIgnoreProperties(value = { "item_quantity" }, allowSetters = true)
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(joinColumns = @JoinColumn, inverseJoinColumns = @JoinColumn)
 	private List<Item> item;
