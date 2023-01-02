@@ -56,8 +56,8 @@ public class CustomerController {
 			@ApiResponse(code = 302, message = "notfound") })
 
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Customer>> getOutwardById(@RequestParam int id) {
-		return service.getOutwardById(id);
+	public ResponseEntity<ResponseStructure<Customer>> getOutwardById(@RequestParam int customerid) {
+		return service.getOutwardById(customerid);
 	}
 
 	@ApiOperation(value = "delete Outward", notes = "method used to delete Outward by id")
@@ -67,8 +67,8 @@ public class CustomerController {
 
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 
-	public ResponseEntity<ResponseStructure<Customer>> deleteOutwardById(@PathVariable int id) {
-		return service.deleteOutwardById(id);
+	public ResponseEntity<ResponseStructure<Customer>> deleteOutwardById(@PathVariable int customerid) {
+		return service.deleteOutwardById(customerid);
 	}
 
 }

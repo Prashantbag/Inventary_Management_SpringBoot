@@ -39,31 +39,31 @@ public class InventoryController {
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error") })
 	@GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseStructure<Inventory>> updateInventoryQTY(@RequestBody Inventory inventory,
-			@RequestParam int id) {
-		return service.serviceqtySaveInventory(inventory, id);
+			@RequestParam int inventoryid) {
+		return service.serviceqtySaveInventory(inventory, inventoryid);
 	}
 
 	@ApiOperation(value = "Updation of Inventory Product", notes = "Used in Updation of Inventory Products")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error") })
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseStructure<Inventory>> updateInventory(@RequestBody Inventory inventory,
-			@RequestParam int id) {
-		return service.serviceUpdateInventory(inventory, id);
+			@RequestParam int inventoryid) {
+		return service.serviceUpdateInventory(inventory, inventoryid);
 	}
 
 	@ApiOperation(value = "Finding Inventory Product", notes = "Used to find Inventory Products by Id")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error") })
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<Inventory>> findInventorybyid(@RequestParam int id) {
-		return service.serviceFindInvById(id);
+	public ResponseEntity<ResponseStructure<Inventory>> findInventorybyid(@RequestParam int inventoryid) {
+		return service.serviceFindInvById(inventoryid);
 	}
 
 	@ApiOperation(value = "Deleting Inventory Product", notes = "Used to Delete Inventory Products by Id")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error"),
 			@ApiResponse(code = 302, message = "Found") })
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<Inventory>> deleteInventorybyid(@PathVariable int id) {
-		return service.serviceDeleteInventory(id);
+	public ResponseEntity<ResponseStructure<Inventory>> deleteInventorybyid(@PathVariable int inventoryid) {
+		return service.serviceDeleteInventory(inventoryid);
 	}
 
 }

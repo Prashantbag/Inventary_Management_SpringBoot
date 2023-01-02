@@ -30,30 +30,30 @@ public class ItemController {
 	@ApiOperation(value = "Create Item", notes = "Used in Creation of Items")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error") })
 	@GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<Item>> saveItem(@RequestBody Item item, @RequestParam int id) {
-		return service.serviceSaveItem(item, id);
+	public ResponseEntity<ResponseStructure<Item>> saveItem(@RequestBody Item item, @RequestParam int inventoryid) {
+		return service.serviceSaveItem(item, inventoryid);
 	}
 
 	@ApiOperation(value = "Updation of Item", notes = "Used in Updation of Items")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error") })
-	@PutMapping(value = "/{inventoryID}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<Item>> updateItem(@RequestBody Item item, @RequestParam int id,
-			@PathVariable int inventoryID) {
-		return service.serviceUpdateItem(item, id, inventoryID);
+	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseStructure<Item>> updateItem(@RequestBody Item item, @RequestParam int itemid,
+			@RequestParam int inventoryid) {
+		return service.serviceUpdateItem(item, itemid, inventoryid);
 	}
 
 	@ApiOperation(value = "Finding Item", notes = "Used to find Items by Id")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error") })
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseStructure<Item>> findItembyid(@RequestParam int id) {
-		return service.serviceFinditembyid(id);
+	public ResponseEntity<ResponseStructure<Item>> findItembyid(@RequestParam int itemid) {
+		return service.serviceFinditembyid(itemid);
 	}
 
 	@ApiOperation(value = "Deleting Item", notes = "Used to Delete Items by Id")
 	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error") })
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseStructure<Item>> deleteItembyid(@PathVariable int id) {
-		return service.serviceDeleteItem(id);
+	public ResponseEntity<ResponseStructure<Item>> deleteItembyid(@PathVariable int itemid) {
+		return service.serviceDeleteItem(itemid);
 	}
 
 }

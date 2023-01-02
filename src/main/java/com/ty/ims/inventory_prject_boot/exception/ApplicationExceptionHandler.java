@@ -90,4 +90,17 @@ public class ApplicationExceptionHandler  extends ResponseEntityExceptionHandler
 	
 	
 	
+	@ExceptionHandler
+	public ResponseEntity<ResponseStructure<String>> wrongEmailIDPasswordExceptionHandler(WrongEmailIDPasswordException exception){
+		
+		ResponseStructure<String>  responseStructure = new ResponseStructure<String>();
+		responseStructure.setStatus(HttpStatus.UNAUTHORIZED.value());
+		responseStructure.setMessage("Wrong Email ID & Password");
+		responseStructure.setData(exception.getMessage());
+		
+		ResponseEntity<ResponseStructure<String>> responseEntity = new ResponseEntity<ResponseStructure<String>>(responseStructure,HttpStatus.UNAUTHORIZED);
+		
+		return responseEntity;
+	}
+	
 }

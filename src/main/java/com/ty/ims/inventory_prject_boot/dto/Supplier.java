@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,17 +27,18 @@ public class Supplier {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int supplierId;
-	
+
 	private String supplierName;
-	
+
 	private long supplierPhoneNo;
-	
+	@Column(unique = true)
 	private String supplierEmailId;
-	
+
 	private Date inwardDate;
-	
+
 	private int inwardQuantity;
-//	@JsonIgnore
+
+	@JsonIgnoreProperties(value = { "item_quantity" })
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(joinColumns = @JoinColumn, inverseJoinColumns = @JoinColumn)
 	private List<Item> items;

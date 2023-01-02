@@ -12,6 +12,7 @@ import com.ty.ims.inventory_prject_boot.dao.AdminDao;
 import com.ty.ims.inventory_prject_boot.dto.Admin;
 import com.ty.ims.inventory_prject_boot.exception.AdminRegisterNotAllowedException;
 import com.ty.ims.inventory_prject_boot.exception.NoSuchIdFoundException;
+import com.ty.ims.inventory_prject_boot.exception.WrongEmailIDPasswordException;
 import com.ty.ims.inventory_prject_boot.util.ResponseStructure;
 
 @Service
@@ -22,8 +23,6 @@ public class AdminService {
 
 	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin admin) {
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
-
-
 		if (adminDao.getAllAdmin().size() < 3) {
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("Admin created");
@@ -96,26 +95,25 @@ public class AdminService {
 
 	}
 
-	
-	
-	public ResponseEntity<ResponseStructure<Admin>> loginAdmin(Admin admin){
+	public ResponseEntity<ResponseStructure<Admin>> loginAdmin(Admin admin) {
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 
-		
-		String password= admin.getAdminPassword();
-		List<Admin> alladmin=adminDao.getAllAdmin();
-		
+		String password = admin.getAdminPassword();
+		List<Admin> alladmin = adminDao.getAllAdmin();
+
 		for (Admin admin2 : alladmin) {
-			if(admin2.getAdminPassword().equals(password)) {
+			if (admin2.getAdminPassword().equals(password)) {
 				responseStructure.setStatus(HttpStatus.FOUND.value());
 				responseStructure.setMessage("Admin Found & Granted Access");
 				responseStructure.setData(admin);
 				break;
 			}
+			else {
+				throw new WrongEmailIDPasswordException();
+			}
 		}
-		
-		return new ResponseEntity<ResponseStructure<Admin>>(responseStructure,HttpStatus.FOUND);
-	}
 
+		return new ResponseEntity<ResponseStructure<Admin>>(responseStructure, HttpStatus.FOUND);
+	}
 
 }

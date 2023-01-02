@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,7 +36,8 @@ public class Customer {
 	private Date outwardDate;
 	@NotNull
 	private int outwardQuantity;
-//	@JsonIgnore
+
+	@JsonIgnoreProperties(value = {"item_quantity"})
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(joinColumns = @JoinColumn, inverseJoinColumns = @JoinColumn)
 	private List<Item> item;
