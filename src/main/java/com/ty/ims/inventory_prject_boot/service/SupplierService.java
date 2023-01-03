@@ -1,6 +1,7 @@
 package com.ty.ims.inventory_prject_boot.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,7 @@ public class SupplierService {
 		ResponseStructure<Supplier> responseStructure = new ResponseStructure<Supplier>();
 		List<Item> listItems = supplier.getItems();
 		supplier.setItems(listItems);
+		supplier.setInwardDate(new Date());
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("supplier saved");
 		responseStructure.setData(dao.saveInward(supplier));
@@ -65,6 +67,7 @@ public class SupplierService {
 					List<Item> items = new ArrayList<Item>();
 					List<Item> toBeUpdatedItems = supplier.getItems();
 					for (Item item : toBeUpdatedItems) {
+						supplier.setInwardQuantity(item.getItem_quantity());
 						item.setItem_id(itemid);
 						item.setItem_quantity(currentItemQuantity + item.getItem_quantity());
 						item.setItem_name(existingItem.get().getItem_name());
@@ -74,7 +77,7 @@ public class SupplierService {
 						inwardReport.setSupplierName(supplier.getSupplierName());
 						inwardReport.setSupplierEmailId(supplier.getSupplierEmailId());
 						inwardReport.setSupplierPhoneNo(supplier.getSupplierPhoneNo());
-						inwardReport.setInwardDate(supplier.getInwardDate());
+						inwardReport.setInwardDate(new Date());
 						inwardReport.setItemName(item.getItem_name());
 						inwardReport.setInwardQuantity(supplier.getInwardQuantity());
 						itemDao.updateItem(item);
@@ -82,6 +85,7 @@ public class SupplierService {
 					}
 					items.addAll(toBeUpdatedItems);
 					supplier.setSupplierId(id);
+					supplier.setInwardDate(new Date());
 					supplier.setItems(items);
 					responseStructure.setStatus(HttpStatus.CREATED.value());
 					responseStructure.setMessage("supplier updated");

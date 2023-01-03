@@ -29,7 +29,7 @@ public class Supplier {
 	private int supplierId;
 
 	@NotNull
-	@Pattern(regexp = "^[A-Za-z]*$", message = "Use only Alphabets, Invalid Input")
+	@Pattern(regexp = "^[A-Z a-z ]*$" , message = "Use only Alphabets, Invalid Input")
 	private String supplierName;
 	
 	@NotNull

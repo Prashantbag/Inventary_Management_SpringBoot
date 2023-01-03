@@ -25,7 +25,7 @@ public class OutwardReport {
 	
 	private int outwardQuantity;
 
-	private int ItemName;
+	private String ItemName;
 
 	public int getCustomerId() {
 		return customerId;
@@ -75,13 +75,14 @@ public class OutwardReport {
 		this.outwardQuantity = outwardQuantity;
 	}
 
-	public int getItemName() {
+	public String getItemName() {
 		return ItemName;
 	}
 
-	public void setItemName(int itemName) {
+	public void setItemName(String itemName) {
 		ItemName = itemName;
 	}
+
 	
 	
 	

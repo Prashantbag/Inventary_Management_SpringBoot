@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.validation.ConstraintViolationException;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -124,5 +125,30 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 				responseStructure, HttpStatus.FORBIDDEN);
 		return responseEntity;
 	}
-	
+
+	@ExceptionHandler
+	public ResponseEntity<ResponseStructure<String>> duplicateEntryExceptionHandler(
+			DataIntegrityViolationException exception) {
+
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+		responseStructure.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
+		responseStructure.setMessage("Duplicate Entry");
+		responseStructure.setData(exception.getLocalizedMessage());
+		ResponseEntity<ResponseStructure<String>> responseEntity = new ResponseEntity<ResponseStructure<String>>(
+				responseStructure, HttpStatus.NOT_ACCEPTABLE);
+		return responseEntity;
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<ResponseStructure<String>> noReportsFoundAfterDataGivenExceptionHandler(
+			NoReportsFoundAfterGivenDateException exception) {
+
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+		responseStructure.setStatus(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("No Report Found After The Given Date Select a Proper Date");
+		responseStructure.setData(exception.message);
+		ResponseEntity<ResponseStructure<String>> responseEntity = new ResponseEntity<ResponseStructure<String>>(
+				responseStructure, HttpStatus.NOT_FOUND);
+		return responseEntity;
+	}
 }

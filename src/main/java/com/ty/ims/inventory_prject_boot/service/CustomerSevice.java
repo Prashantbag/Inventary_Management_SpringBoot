@@ -85,6 +85,7 @@ public class CustomerSevice {
 					for (Item item : toBeUpdatedItems) {
 						item.setItem_id(itemId);
 						if(item.getItem_quantity()<=10) {
+							customer.setOutwardQuantity(item.getItem_quantity());
 							item.setItem_quantity(currentItemQuantity - (item.getItem_quantity()));
 							item.setItem_name(existingItem.get().getItem_name());
 							item.setItem_price(existingItem.get().getItem_price());
@@ -95,7 +96,7 @@ public class CustomerSevice {
 							outwardReport.setCustomerPhoneNo(customer.getCustomerPhoneNo());
 							outwardReport.setOutwardDate(new Date());
 							outwardReport.setOutwardQuantity(customer.getOutwardQuantity());
-							outwardReport.setItemName(item.getItem_id());
+							outwardReport.setItemName(item.getItem_name());
 							itemDao.updateItem(item);
 							outwardReportDao.saveOutwardReport(outwardReport);
 						}else {

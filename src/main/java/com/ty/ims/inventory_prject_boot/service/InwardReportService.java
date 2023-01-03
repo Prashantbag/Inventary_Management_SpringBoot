@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ty.ims.inventory_prject_boot.dao.InwardReportDao;
 import com.ty.ims.inventory_prject_boot.dto.InwardReport;
+import com.ty.ims.inventory_prject_boot.exception.NoReportsFoundAfterGivenDateException;
 import com.ty.ims.inventory_prject_boot.exception.NoSuchIdFoundException;
 import com.ty.ims.inventory_prject_boot.util.ResponseStructure;
 
@@ -29,6 +30,6 @@ public class InwardReportService {
 			responseStructure.setData(optional.get());
 			return new ResponseEntity<ResponseStructure<InwardReport>>(responseStructure, HttpStatus.FOUND);
 		}
-		throw new NoSuchIdFoundException();
+		throw new NoReportsFoundAfterGivenDateException();
 	}
 }
