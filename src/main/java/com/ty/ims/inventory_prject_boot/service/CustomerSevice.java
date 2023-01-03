@@ -1,6 +1,7 @@
 package com.ty.ims.inventory_prject_boot.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ import com.ty.ims.inventory_prject_boot.dto.Customer;
 import com.ty.ims.inventory_prject_boot.dto.Inventory;
 import com.ty.ims.inventory_prject_boot.dto.Item;
 import com.ty.ims.inventory_prject_boot.dto.OutwardReport;
-import com.ty.ims.inventory_prject_boot.dto.Supplier;
+import com.ty.ims.inventory_prject_boot.exception.ItemQuantityExceededException;
 import com.ty.ims.inventory_prject_boot.exception.NoSuchIdFoundException;
 import com.ty.ims.inventory_prject_boot.util.ResponseStructure;
 
@@ -42,6 +43,7 @@ public class CustomerSevice {
 	public ResponseEntity<ResponseStructure<Customer>> saveOutward(Customer customer) {
 		ResponseStructure<Customer> responseStructure = new ResponseStructure<Customer>();
 		List<Item> listItems = customer.getItem();
+		customer.setOutwardDate(new Date());
 		customer.setItem(listItems);
 		responseStructure.setStatus(HttpStatus.CREATED.value());
 		responseStructure.setMessage("customer saved");
@@ -82,20 +84,29 @@ public class CustomerSevice {
 					List<Item> toBeUpdatedItems = customer.getItem();
 					for (Item item : toBeUpdatedItems) {
 						item.setItem_id(itemId);
-						item.setItem_quantity(currentItemQuantity - item.getItem_quantity());
-						inventory.setProduct_id(inventoryid);
-						item.setInventory(inventory);
-						outwardReport.setCustomerName(customer.getCustomerName());
-						outwardReport.setCustomerEmailId(customer.getCustomerEmailId());
-						outwardReport.setCustomerPhoneNo(customer.getCustomerPhoneNo());
-						outwardReport.setOutwardDate(customer.getOutwardDate());
-						outwardReport.setOutwardQuantity(customer.getOutwardQuantity());
-						outwardReport.setItemName(item.getItem_id());
-						itemDao.updateItem(item);
-						outwardReportDao.saveOutwardReport(outwardReport);
+						if(item.getItem_quantity()<=10) {
+							customer.setOutwardQuantity(item.getItem_quantity());
+							item.setItem_quantity(currentItemQuantity - (item.getItem_quantity()));
+							item.setItem_name(existingItem.get().getItem_name());
+							item.setItem_price(existingItem.get().getItem_price());
+							inventory.setProduct_id(inventoryid);
+							item.setInventory(inventory);
+							outwardReport.setCustomerName(customer.getCustomerName());
+							outwardReport.setCustomerEmailId(customer.getCustomerEmailId());
+							outwardReport.setCustomerPhoneNo(customer.getCustomerPhoneNo());
+							outwardReport.setOutwardDate(new Date());
+							outwardReport.setOutwardQuantity(customer.getOutwardQuantity());
+							outwardReport.setItemName(item.getItem_name());
+							itemDao.updateItem(item);
+							outwardReportDao.saveOutwardReport(outwardReport);
+						}else {
+							throw new ItemQuantityExceededException();
+						}
+						
 					}
 					items.addAll(toBeUpdatedItems);
 					customer.setCustomerId(id);
+					customer.setOutwardDate(new Date());
 					customer.setItem(items);
 					responseStructure.setStatus(HttpStatus.CREATED.value());
 					responseStructure.setMessage("customer updated");
