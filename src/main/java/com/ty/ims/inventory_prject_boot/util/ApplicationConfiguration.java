@@ -69,5 +69,11 @@ public class ApplicationConfiguration {
 	public OutwardReport getOutwardReport() {
 		return new OutwardReport();
 	}
+	
+	@Bean
+	public CryptographicalSecurity getCryptographicalSecurity() {
+		return new CryptographicalSecurity();
+		
+	}
 
 }

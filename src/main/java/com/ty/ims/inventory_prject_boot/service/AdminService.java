@@ -13,6 +13,7 @@ import com.ty.ims.inventory_prject_boot.dto.Admin;
 import com.ty.ims.inventory_prject_boot.exception.AdminRegisterNotAllowedException;
 import com.ty.ims.inventory_prject_boot.exception.NoSuchIdFoundException;
 import com.ty.ims.inventory_prject_boot.exception.WrongEmailIDPasswordException;
+import com.ty.ims.inventory_prject_boot.util.CryptographicalSecurity;
 import com.ty.ims.inventory_prject_boot.util.ResponseStructure;
 
 @Service
@@ -20,10 +21,14 @@ public class AdminService {
 
 	@Autowired
 	private AdminDao adminDao;
+	
+	@Autowired
+	private CryptographicalSecurity cryptographicalSecurity;
 
 	public ResponseEntity<ResponseStructure<Admin>> saveAdmin(Admin admin) {
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 		if (adminDao.getAllAdmin().size() < 3) {
+			admin.setAdminPassword(cryptographicalSecurity.encrypt(admin.getAdminPassword()));
 			responseStructure.setStatus(HttpStatus.CREATED.value());
 			responseStructure.setMessage("Admin created");
 			responseStructure.setData(adminDao.saveAdmin(admin));
@@ -63,9 +68,11 @@ public class AdminService {
 		Optional<Admin> optional = adminDao.getAdminById(id);
 
 		if (optional.isPresent()) {
+			Admin admin=optional.get();
+			admin.setAdminPassword(cryptographicalSecurity.decrypt(admin.getAdminPassword()));
 			responseStructure.setStatus(HttpStatus.FOUND.value());
 			responseStructure.setMessage("Admin Found");
-			responseStructure.setData(optional.get());
+			responseStructure.setData(admin);
 
 		} else {
 			throw new NoSuchIdFoundException();
@@ -102,7 +109,7 @@ public class AdminService {
 		List<Admin> alladmin = adminDao.getAllAdmin();
 
 		for (Admin admin2 : alladmin) {
-			if (admin2.getAdminPassword().equals(password)) {
+			if (cryptographicalSecurity.decrypt(admin2.getAdminPassword()).equals(password)) {
 				responseStructure.setStatus(HttpStatus.FOUND.value());
 				responseStructure.setMessage("Admin Found & Granted Access");
 				responseStructure.setData(admin);
