@@ -35,7 +35,7 @@ public class ApplicationConfiguration {
 				"testyantra.com", contact, "Apache Tomcat", "apache.com", extenList);
 
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.ty.ims.inventory_prject_boot")).build();
+				.apis(RequestHandlerSelectors.basePackage("com.ty.ims.inventory_prject_boot")).build().apiInfo(apiInfo);
 	}
 
 	@Bean
