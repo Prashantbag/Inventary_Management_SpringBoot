@@ -37,7 +37,7 @@ public class InventoryService {
 			List<Item> list = optional.get().getItem();
 			int total_quantity = 0;
 			for (Item item : list) {
-				total_quantity = total_quantity + (item.getItem_quantity());
+				total_quantity = total_quantity + (item.getQuantity());
 			}
 			inventory.setProduct_quantity(total_quantity);
 

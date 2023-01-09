@@ -63,15 +63,15 @@ public class SupplierService {
 			if (inventoryOptional.isPresent()) {
 				if (existingItem.isPresent()) {
 					inventory = inventoryOptional.get();
-					int currentItemQuantity = existingItem.get().getItem_quantity();
+					int currentItemQuantity = existingItem.get().getQuantity();
 					List<Item> items = new ArrayList<Item>();
 					List<Item> toBeUpdatedItems = supplier.getItems();
 					for (Item item : toBeUpdatedItems) {
-						supplier.setInwardQuantity(item.getItem_quantity());
+						supplier.setInwardQuantity(item.getQuantity());
 						item.setItem_id(itemid);
-						item.setItem_quantity(currentItemQuantity + item.getItem_quantity());
+						item.setQuantity(currentItemQuantity + item.getQuantity());
 						item.setItem_name(existingItem.get().getItem_name());
-						item.setItem_price(existingItem.get().getItem_price());
+						item.setPrice(existingItem.get().getPrice());
 						inventory.setProduct_id(inventoryid);
 						item.setInventory(inventory);
 						inwardReport.setSupplierName(supplier.getSupplierName());
