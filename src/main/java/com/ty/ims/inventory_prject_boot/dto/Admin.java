@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,23 +20,25 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
-//@Builder
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Data
 public class Admin {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@NotNull
+	@Email(message = "Enter Proper Email ID")
 	private String adminEmail;
+
 	@NotNull
 	private String adminPassword;
+
 	@NotNull
+	@Pattern(regexp = "^[A-Za-z]*$", message = "Use only Alphabets, Invalid Input")
 	private String adminName;
-	//@Column(unique = true)
+
+	@Column(unique = true)
 	private String adminRole;
+
 	@NotNull
 	private long adminPhone;
 

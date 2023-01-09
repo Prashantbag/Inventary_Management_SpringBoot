@@ -85,11 +85,11 @@ public class CustomerSevice {
 					for (Item item : toBeUpdatedItems) {
 						item.setItem_id(itemId);
 						if(item.getQuantity()<=10) {
+							inventory.setProduct_id(inventoryid);
 							customer.setOutwardQuantity(item.getQuantity());
 							item.setQuantity(currentItemQuantity - (item.getQuantity()));
 							item.setItem_name(existingItem.get().getItem_name());
 							item.setPrice(existingItem.get().getPrice());
-							inventory.setProduct_id(inventoryid);
 							item.setInventory(inventory);
 							outwardReport.setCustomerName(customer.getCustomerName());
 							outwardReport.setCustomerEmailId(customer.getCustomerEmailId());

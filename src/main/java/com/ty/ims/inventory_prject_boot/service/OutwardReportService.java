@@ -16,22 +16,9 @@ import com.ty.ims.inventory_prject_boot.util.ResponseStructure;
 
 @Service
 public class OutwardReportService {
-	
+
 	@Autowired
 	OutwardReportDao dao;
-
-//	public OutwardReport servicefindoutbydate(Date date, Date date1) {
-//		return dao.findByStartDateBeOutwardReport(date, date1);
-//	}
-
-//	public OutwardReport servicefindoutbydateaaa(Date date) {
-//		Optional<OutwardReport> optional = dao.findByStartDateBeOutwardReport(date);
-//		if (optional.isPresent()) {
-//			date.setDate(optional.get());
-//		//	return dao.findByStartDateBeOutwardReport(date);
-//		}
-//throw new NoSuchIdFoundException();	
-//	}
 
 	public ResponseEntity<ResponseStructure<OutwardReport>> servicefindoutbydate(Date date) {
 		ResponseStructure<OutwardReport> responseStructure = new ResponseStructure<OutwardReport>();
@@ -44,5 +31,5 @@ public class OutwardReportService {
 		}
 		throw new NoReportsFoundAfterGivenDateException();
 	}
-	
+
 }

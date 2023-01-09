@@ -24,9 +24,12 @@ public class Item {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int item_id;
+
 	private String item_name;
+
 	@Column(name = "item_quantity")
 	private int quantity;
+
 	@Column(name = "item_price")
 	private double price;
 

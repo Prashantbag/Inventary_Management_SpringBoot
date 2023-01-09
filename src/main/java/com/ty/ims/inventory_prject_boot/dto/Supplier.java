@@ -43,7 +43,7 @@ public class Supplier {
 
 	private int inwardQuantity;
 
-	@JsonIgnoreProperties(value = { "item_quantity" }, allowSetters = true)
+	@JsonIgnoreProperties(value = { "quantity" }, allowSetters = true)
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(joinColumns = @JoinColumn, inverseJoinColumns = @JoinColumn)
 	private List<Item> items;
