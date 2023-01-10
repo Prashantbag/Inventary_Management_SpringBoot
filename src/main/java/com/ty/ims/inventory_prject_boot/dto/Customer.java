@@ -45,7 +45,7 @@ public class Customer {
 
 	private int outwardQuantity;
 
-	@JsonIgnoreProperties(value = { "item_quantity" }, allowSetters = true)
+	@JsonIgnoreProperties(value = { "quantity" }, allowSetters = true)
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(joinColumns = @JoinColumn, inverseJoinColumns = @JoinColumn)
 	private List<Item> item;

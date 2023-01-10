@@ -2,6 +2,7 @@ package com.ty.ims.inventory_prject_boot.dto;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,9 +24,14 @@ public class Item {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int item_id;
+
 	private String item_name;
-	private int item_quantity;
-	private double item_price;
+
+	@Column(name = "item_quantity")
+	private int quantity;
+
+	@Column(name = "item_price")
+	private double price;
 
 	@JsonIgnore
 	@ManyToOne
@@ -54,22 +60,6 @@ public class Item {
 
 	public void setItem_name(String item_name) {
 		this.item_name = item_name;
-	}
-
-	public int getItem_quantity() {
-		return item_quantity;
-	}
-
-	public void setItem_quantity(int item_quantity) {
-		this.item_quantity = item_quantity;
-	}
-
-	public double getItem_price() {
-		return item_price;
-	}
-
-	public void setItem_price(double item_price) {
-		this.item_price = item_price;
 	}
 
 	public List<Customer> getCustomer() {

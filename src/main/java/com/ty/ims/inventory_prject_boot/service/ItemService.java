@@ -1,5 +1,6 @@
 package com.ty.ims.inventory_prject_boot.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,4 +88,27 @@ public class ItemService {
 		return new ResponseEntity<ResponseStructure<Item>>(responseStructure, HttpStatus.CREATED);
 	}
 
+	public ResponseEntity<ResponseStructure<List<Item>>> servicefindbyprice(double price) {
+		ResponseStructure<List<Item>> responseStructure = new ResponseStructure<List<Item>>();
+		responseStructure.setStatus(HttpStatus.FOUND.value());
+		responseStructure.setMessage("Found item by price");
+		responseStructure.setData(dao.findbyprice(price));
+		return new ResponseEntity<ResponseStructure<List<Item>>>(responseStructure, HttpStatus.FOUND);
+	}
+
+	public ResponseEntity<ResponseStructure<List<Item>>> servicefilterbyqtygreater(int qty) {
+		ResponseStructure<List<Item>> responseStructure = new ResponseStructure<List<Item>>();
+		responseStructure.setStatus(HttpStatus.FOUND.value());
+		responseStructure.setMessage("Found item by qty greater and equal to given qty");
+		responseStructure.setData(dao.filterbyqtygreater(qty));
+		return new ResponseEntity<ResponseStructure<List<Item>>>(responseStructure, HttpStatus.FOUND);
+	}
+
+	public ResponseEntity<ResponseStructure<List<Item>>> servicefilterbyqtylesser(int qty) {
+		ResponseStructure<List<Item>> responseStructure = new ResponseStructure<List<Item>>();
+		responseStructure.setStatus(HttpStatus.FOUND.value());
+		responseStructure.setMessage("Found item by qty lesser and equal to given qty");
+		responseStructure.setData(dao.filterbyqtylesser(qty));
+		return new ResponseEntity<ResponseStructure<List<Item>>>(responseStructure, HttpStatus.FOUND);
+	}
 }

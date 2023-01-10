@@ -65,7 +65,7 @@ public class CustomerController {
 			@ApiResponse(code = 500, message = "internal server error"), @ApiResponse(code = 404, message = "notfound"),
 			@ApiResponse(code = 302, message = "notfound") })
 
-	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@DeleteMapping(value = "/{customerid}", produces = { MediaType.APPLICATION_JSON_VALUE })
 
 	public ResponseEntity<ResponseStructure<Customer>> deleteOutwardById(@PathVariable int customerid) {
 		return service.deleteOutwardById(customerid);

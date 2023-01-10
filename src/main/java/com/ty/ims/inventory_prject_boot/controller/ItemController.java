@@ -1,5 +1,7 @@
 package com.ty.ims.inventory_prject_boot.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +56,27 @@ public class ItemController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ResponseStructure<Item>> deleteItembyid(@PathVariable int itemid) {
 		return service.serviceDeleteItem(itemid);
+	}
+
+	@ApiOperation(value = "Finding Item by Price", notes = "Used to find Items by Price")
+	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error") })
+	@GetMapping(value = "itemprice", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseStructure<List<Item>>> findbyPriceItem(@RequestParam double price) {
+		return service.servicefindbyprice(price);
+	}
+
+	@ApiOperation(value = "Finding Item by Quantity", notes = "Used to find Items by Quantity which is greater than the given value")
+	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error") })
+	@GetMapping(value = "itemqtygreaterthan", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseStructure<List<Item>>> filterbyqtygreaterItem(@RequestParam int qty) {
+		return service.servicefilterbyqtygreater(qty);
+	}
+
+	@ApiOperation(value = "Finding Item by Quantity", notes = "Used to find Items by Quantity which is lesser than the given value")
+	@ApiResponses(value = { @ApiResponse(code = 500, message = "Internal Server Error") })
+	@GetMapping(value = "itemqtylesserthan", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseStructure<List<Item>>> filterbyqtylesserItem(@RequestParam int qty) {
+		return service.servicefilterbyqtylesser(qty);
 	}
 
 }

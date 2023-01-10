@@ -1,5 +1,6 @@
 package com.ty.ims.inventory_prject_boot.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,17 @@ public class ItemDao {
 
 	public void deleteItem(Item item) {
 		repository.delete(item);
+	}
+
+	public List<Item> findbyprice(double price) {
+		return repository.findByPrice(price);
+	}
+
+	public List<Item> filterbyqtygreater(int qty) {
+		return repository.findByquantityGreaterThanEqual(qty);
+	}
+
+	public List<Item> filterbyqtylesser(int qty) {
+		return repository.findByquantityLessThanEqual(qty);
 	}
 }

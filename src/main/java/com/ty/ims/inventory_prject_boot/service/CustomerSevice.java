@@ -79,17 +79,17 @@ public class CustomerSevice {
 			if (inventoryOptional.isPresent()) {
 				if (existingItem.isPresent()) {
 					inventory = inventoryOptional.get();
-					int currentItemQuantity = existingItem.get().getItem_quantity();
+					int currentItemQuantity = existingItem.get().getQuantity();
 					List<Item> items = new ArrayList<Item>();
 					List<Item> toBeUpdatedItems = customer.getItem();
 					for (Item item : toBeUpdatedItems) {
 						item.setItem_id(itemId);
-						if(item.getItem_quantity()<=10) {
-							customer.setOutwardQuantity(item.getItem_quantity());
-							item.setItem_quantity(currentItemQuantity - (item.getItem_quantity()));
-							item.setItem_name(existingItem.get().getItem_name());
-							item.setItem_price(existingItem.get().getItem_price());
+						if(item.getQuantity()<=10) {
 							inventory.setProduct_id(inventoryid);
+							customer.setOutwardQuantity(item.getQuantity());
+							item.setQuantity(currentItemQuantity - (item.getQuantity()));
+							item.setItem_name(existingItem.get().getItem_name());
+							item.setPrice(existingItem.get().getPrice());
 							item.setInventory(inventory);
 							outwardReport.setCustomerName(customer.getCustomerName());
 							outwardReport.setCustomerEmailId(customer.getCustomerEmailId());
