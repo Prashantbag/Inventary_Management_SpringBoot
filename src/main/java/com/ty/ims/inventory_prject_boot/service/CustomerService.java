@@ -22,7 +22,7 @@ import com.ty.ims.inventory_prject_boot.exception.NoSuchIdFoundException;
 import com.ty.ims.inventory_prject_boot.util.ResponseStructure;
 
 @Service
-public class CustomerSevice {
+public class CustomerService {
 	@Autowired
 	private CustomerDao dao;
 	@Autowired
@@ -81,7 +81,7 @@ public class CustomerSevice {
 					List<Item> toBeUpdatedItems = customer.getItem();
 					for (Item item : toBeUpdatedItems) {
 						item.setItem_id(itemId);
-						if(item.getQuantity()<=10) {
+						if(item.getQuantity()<=10 && item.getQuantity() < currentItemQuantity) {
 							inventory.setProduct_id(inventoryid);
 							customer.setOutwardQuantity(item.getQuantity());
 							item.setQuantity(currentItemQuantity - (item.getQuantity()));

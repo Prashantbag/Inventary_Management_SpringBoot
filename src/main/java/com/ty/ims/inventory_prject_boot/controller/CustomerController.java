@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.ims.inventory_prject_boot.dto.Customer;
-import com.ty.ims.inventory_prject_boot.service.CustomerSevice;
+import com.ty.ims.inventory_prject_boot.service.CustomerService;
 import com.ty.ims.inventory_prject_boot.util.ResponseStructure;
 
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("customer")
 public class CustomerController {
 	@Autowired
-	private CustomerSevice service;
+	private CustomerService service;
 
 	@ApiOperation(value = "save Outward", notes = "method used to save Outward")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"), @ApiResponse(code = 200, message = "ok"),
