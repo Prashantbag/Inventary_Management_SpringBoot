@@ -29,9 +29,6 @@ public class CustomerSevice {
 	ItemDao itemDao;
 
 	@Autowired
-	OutwardReport outwardReport;
-
-	@Autowired
 	OutwardReportDao outwardReportDao;
 
 	@Autowired
@@ -91,6 +88,7 @@ public class CustomerSevice {
 							item.setItem_name(existingItem.get().getItem_name());
 							item.setPrice(existingItem.get().getPrice());
 							item.setInventory(inventory);
+							OutwardReport outwardReport = new OutwardReport();
 							outwardReport.setCustomerName(customer.getCustomerName());
 							outwardReport.setCustomerEmailId(customer.getCustomerEmailId());
 							outwardReport.setCustomerPhoneNo(customer.getCustomerPhoneNo());

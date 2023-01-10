@@ -27,11 +27,9 @@ public class SupplierService {
 	private SupplierDao dao;
 	@Autowired
 	ItemDao itemDao;
+	
 	@Autowired
 	InwardReportDao inwardReportDao;
-
-	@Autowired
-	InwardReport inwardReport;
 
 	@Autowired
 	InventoryDao inventoryDao;
@@ -74,6 +72,7 @@ public class SupplierService {
 						item.setPrice(existingItem.get().getPrice());
 						inventory.setProduct_id(inventoryid);
 						item.setInventory(inventory);
+						InwardReport inwardReport = new InwardReport();
 						inwardReport.setSupplierName(supplier.getSupplierName());
 						inwardReport.setSupplierEmailId(supplier.getSupplierEmailId());
 						inwardReport.setSupplierPhoneNo(supplier.getSupplierPhoneNo());
