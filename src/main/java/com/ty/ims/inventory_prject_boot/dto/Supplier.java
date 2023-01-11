@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
@@ -25,13 +27,15 @@ import lombok.Setter;
 @Entity
 public class Supplier {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int supplierId;
+	@GenericGenerator(name = "supplier_Id", strategy = "com.ty.ims.inventory_prject_boot.util.Sup_CustomIdGenerator")
+	@GeneratedValue(generator = "supplier_Id")
+	@Column(name = "supplier_Id")
+	private String supplierId;
 
 	@NotNull
-	@Pattern(regexp = "^[A-Z a-z ]*$" , message = "Use only Alphabets, Invalid Input")
+	@Pattern(regexp = "^[A-Z a-z ]*$", message = "Use only Alphabets, Invalid Input")
 	private String supplierName;
-	
+
 	@NotNull
 	private long supplierPhoneNo;
 
@@ -48,12 +52,11 @@ public class Supplier {
 	@JoinTable(joinColumns = @JoinColumn, inverseJoinColumns = @JoinColumn)
 	private List<Item> items;
 
-	
-	public int getSupplierId() {
+	public String getSupplierId() {
 		return supplierId;
 	}
 
-	public void setSupplierId(int supplierId) {
+	public void setSupplierId(String supplierId) {
 		this.supplierId = supplierId;
 	}
 

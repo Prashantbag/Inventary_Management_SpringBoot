@@ -21,7 +21,7 @@ public class AdminService {
 
 	@Autowired
 	private AdminDao adminDao;
-	
+
 	@Autowired
 	private CryptographicalSecurity cryptographicalSecurity;
 
@@ -42,7 +42,7 @@ public class AdminService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(Admin admin, int id) {
+	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(Admin admin, String id) {
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 
 		Optional<Admin> admin2 = adminDao.getAdminById(id);
@@ -61,14 +61,14 @@ public class AdminService {
 		return responseEntity;
 	}
 
-	public ResponseEntity<ResponseStructure<Admin>> getAdminById(int id) {
+	public ResponseEntity<ResponseStructure<Admin>> getAdminById(String id) {
 
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 
 		Optional<Admin> optional = adminDao.getAdminById(id);
 
 		if (optional.isPresent()) {
-			Admin admin=optional.get();
+			Admin admin = optional.get();
 			admin.setAdminPassword(cryptographicalSecurity.decrypt(admin.getAdminPassword()));
 			responseStructure.setStatus(HttpStatus.FOUND.value());
 			responseStructure.setMessage("Admin Found");
@@ -83,7 +83,7 @@ public class AdminService {
 		return responseEntity;
 	}
 
-	public ResponseEntity<ResponseStructure<Admin>> deleteAdmin(int id) {
+	public ResponseEntity<ResponseStructure<Admin>> deleteAdmin(String id) {
 		ResponseStructure<Admin> responseStructure = new ResponseStructure<Admin>();
 		Optional<Admin> optional = adminDao.getAdminById(id);
 
@@ -114,8 +114,7 @@ public class AdminService {
 				responseStructure.setMessage("Admin Found & Granted Access");
 				responseStructure.setData(admin);
 				break;
-			}
-			else {
+			} else {
 				throw new WrongEmailIDPasswordException();
 			}
 		}

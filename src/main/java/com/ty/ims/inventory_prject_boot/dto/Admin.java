@@ -9,6 +9,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,8 +25,10 @@ import lombok.ToString;
 public class Admin {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@GenericGenerator(name = "admin_Id", strategy = "com.ty.ims.inventory_prject_boot.util.Admin_customIdGenerator")
+	@GeneratedValue(generator = "admin_Id")
+	@Column(name = "admin_Id")
+	private String id;
 	@NotNull
 	@Email(message = "Enter Proper Email ID")
 	private String adminEmail;
@@ -42,11 +46,11 @@ public class Admin {
 	@NotNull
 	private long adminPhone;
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

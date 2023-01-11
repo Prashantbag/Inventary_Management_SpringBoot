@@ -50,7 +50,7 @@ public class CustomerService {
 		return responseEntity;
 	}
 
-	public ResponseEntity<ResponseStructure<Customer>> saveitems(int customerid, int itemid) {
+	public ResponseEntity<ResponseStructure<Customer>> saveitems(String customerid, int itemid) {
 		ResponseStructure<Customer> responseStructure = new ResponseStructure<Customer>();
 		Optional<Item> item = itemDao.findItembyid(itemid);
 		List<Item> items1 = (List) item.get();
@@ -65,7 +65,7 @@ public class CustomerService {
 		return responseEntity;
 	}
 
-	public ResponseEntity<ResponseStructure<Customer>> upadetOutward(Customer customer, int id, int itemId,
+	public ResponseEntity<ResponseStructure<Customer>> upadetOutward(Customer customer, String id, int itemId,
 			int inventoryid) {
 
 		ResponseStructure<Customer> responseStructure = new ResponseStructure<Customer>();
@@ -97,10 +97,10 @@ public class CustomerService {
 							outwardReport.setItemName(item.getItem_name());
 							itemDao.updateItem(item);
 							outwardReportDao.saveOutwardReport(outwardReport);
-						}else {
+						} else {
 							throw new ItemQuantityExceededException();
 						}
-						
+
 					}
 					items.addAll(toBeUpdatedItems);
 					customer.setCustomerId(id);
@@ -118,7 +118,7 @@ public class CustomerService {
 		return new ResponseEntity<ResponseStructure<Customer>>(responseStructure, HttpStatus.CREATED);
 	}
 
-	public ResponseEntity<ResponseStructure<Customer>> getOutwardById(int id) {
+	public ResponseEntity<ResponseStructure<Customer>> getOutwardById(String id) {
 		Optional<Customer> customer = dao.getOutwardById(id);
 		ResponseStructure<Customer> responseStructure = new ResponseStructure<Customer>();
 		if (customer.isPresent()) {
@@ -133,7 +133,7 @@ public class CustomerService {
 		return responseEntity;
 	}
 
-	public ResponseEntity<ResponseStructure<Customer>> deleteOutwardById(int id) {
+	public ResponseEntity<ResponseStructure<Customer>> deleteOutwardById(String id) {
 		Optional<Customer> customer = dao.getOutwardById(id);
 		ResponseStructure<Customer> responseStructure = new ResponseStructure<Customer>();
 		if (customer.isPresent()) {

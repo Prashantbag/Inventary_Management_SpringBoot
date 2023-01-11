@@ -21,7 +21,7 @@ public class SupplierDao {
 		return repository.save(supplier);
 	}
 
-	public Optional<Supplier> getInwardById(int id) {
+	public Optional<Supplier> getInwardById(String id) {
 		return repository.findById(id);
 	}
 

@@ -16,6 +16,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -27,21 +28,22 @@ import lombok.Setter;
 @Setter
 public class Customer {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int customerId;
+	@GenericGenerator(name = "customer_Id", strategy = "com.ty.ims.inventory_prject_boot.util.Customer_customIdGenerator")
+	@GeneratedValue(generator = "customer_Id")
+	@Column(name = "customer_Id")
+	private String customerId;
 	@NotNull
 	@Pattern(regexp = "^[A-Za-z]*$", message = "Use only Alphabets, Invalid Input")
 	private String customerName;
-	
+
 	@Column(unique = true)
 	@Email(message = "Enter Proper Email ID")
 	private String customerEmailId;
-	
+
 	@NotNull
 	private long customerPhoneNo;
-	
+
 	private Date outwardDate;
-	
 
 	private int outwardQuantity;
 
@@ -50,11 +52,11 @@ public class Customer {
 	@JoinTable(joinColumns = @JoinColumn, inverseJoinColumns = @JoinColumn)
 	private List<Item> item;
 
-	public int getCustomerId() {
+	public String getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(int customerId) {
+	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
 
