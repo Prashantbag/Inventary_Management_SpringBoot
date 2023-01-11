@@ -27,7 +27,7 @@ public class SupplierService {
 	private SupplierDao dao;
 	@Autowired
 	ItemDao itemDao;
-	
+
 	@Autowired
 	InwardReportDao inwardReportDao;
 
@@ -51,7 +51,7 @@ public class SupplierService {
 
 	}
 
-	public ResponseEntity<ResponseStructure<Supplier>> updateinward(Supplier supplier, int id, int itemid,
+	public ResponseEntity<ResponseStructure<Supplier>> updateinward(Supplier supplier, String id, int itemid,
 			int inventoryid) {
 		ResponseStructure<Supplier> responseStructure = new ResponseStructure<Supplier>();
 		Optional<Supplier> supplier2 = dao.getInwardById(id);
@@ -99,7 +99,7 @@ public class SupplierService {
 		return new ResponseEntity<ResponseStructure<Supplier>>(responseStructure, HttpStatus.CREATED);
 	}
 
-	public ResponseEntity<ResponseStructure<Supplier>> getInwardById(int id) {
+	public ResponseEntity<ResponseStructure<Supplier>> getInwardById(String id) {
 		Optional<Supplier> supplier = dao.getInwardById(id);
 		ResponseStructure<Supplier> responseStructure = new ResponseStructure<Supplier>();
 		if (supplier.isPresent()) {
@@ -114,7 +114,7 @@ public class SupplierService {
 		return responseEntity;
 	}
 
-	public ResponseEntity<ResponseStructure<Supplier>> deleteInwardById(int id) {
+	public ResponseEntity<ResponseStructure<Supplier>> deleteInwardById(String id) {
 		Optional<Supplier> supplier = dao.getInwardById(id);
 		ResponseStructure<Supplier> responseStructure = new ResponseStructure<Supplier>();
 		if (supplier.isPresent()) {

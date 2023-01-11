@@ -45,7 +45,7 @@ public class AdminController {
 			@ApiResponse(code = 404, message = "Not Found"),
 			@ApiResponse(code = 500, message = "Internal Server Error") })
 	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Admin>> getAdmin(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<Admin>> getAdmin(@PathVariable String id) {
 		return adminService.getAdminById(id);
 	}
 
@@ -65,7 +65,8 @@ public class AdminController {
 			@ApiResponse(code = 500, message = "Internal Server Error") })
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(@RequestBody Admin admin, @RequestParam int adminid) {
+	public ResponseEntity<ResponseStructure<Admin>> updateAdmin(@RequestBody Admin admin,
+			@RequestParam String adminid) {
 		return adminService.updateAdmin(admin, adminid);
 	}
 
@@ -74,7 +75,7 @@ public class AdminController {
 			@ApiResponse(code = 404, message = "Not Found"),
 			@ApiResponse(code = 500, message = "Internal Server Error") })
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Admin>> deleteAdmin(@PathVariable int id) {
+	public ResponseEntity<ResponseStructure<Admin>> deleteAdmin(@PathVariable String id) {
 		return adminService.deleteAdmin(id);
 	}
 }

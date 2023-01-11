@@ -23,7 +23,7 @@ public class AdminDao {
 		return adminRepository.findAll();
 	}
 
-	public Optional<Admin> getAdminById(int id) {
+	public Optional<Admin> getAdminById(String id) {
 		return adminRepository.findById(id);
 	}
 

@@ -46,7 +46,7 @@ public class SupplierController {
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<Supplier>> updateInward(@RequestBody Supplier supplier,
-			@RequestParam int supplierid, @RequestParam int itemId, @RequestParam int inventoryid) {
+			@RequestParam String supplierid, @RequestParam int itemId, @RequestParam int inventoryid) {
 		return service.updateinward(supplier,supplierid, itemId, inventoryid);
 	}
 
@@ -56,7 +56,7 @@ public class SupplierController {
 			@ApiResponse(code = 302, message = "found") })
 
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Supplier>> getInwardById(@RequestParam int supplierid) {
+	public ResponseEntity<ResponseStructure<Supplier>> getInwardById(@RequestParam String supplierid) {
 		return service.getInwardById(supplierid);
 	}
 
@@ -66,7 +66,7 @@ public class SupplierController {
 			@ApiResponse(code = 302, message = "found") })
 
 	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Supplier>> deleteInwardById(@PathVariable int supplierid) {
+	public ResponseEntity<ResponseStructure<Supplier>> deleteInwardById(@PathVariable String supplierid) {
 		return service.deleteInwardById(supplierid);
 	}
 }
