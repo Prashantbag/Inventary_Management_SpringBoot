@@ -10,15 +10,15 @@ import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
-public class Customer_customIdGenerator implements IdentifierGenerator {
+public class Admin_customIdGenerator implements IdentifierGenerator {
 
 	@Override
 	public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
-		String prefix = "CUS_", suffix = "";
+		String prefix = "Admin_", suffix = "";
 		try {
 			Connection connection = session.connection();
 			Statement statement = connection.createStatement();
-			String sql = "select * from Customer order by customer_Id desc limit 1";
+			String sql = "select * from Admin order by admin_Id desc limit 1";
 			ResultSet resultSet = statement.executeQuery(sql);
 			if (resultSet.next()) {
 				String res = resultSet.getString(1);

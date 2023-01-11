@@ -47,7 +47,7 @@ public class SupplierController {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<Supplier>> updateInward(@RequestBody Supplier supplier,
 			@RequestParam String supplierid, @RequestParam int itemId, @RequestParam int inventoryid) {
-		return service.updateinward(supplier,supplierid, itemId, inventoryid);
+		return service.updateinward(supplier, supplierid, itemId, inventoryid);
 	}
 
 	@ApiOperation(value = "get Inward", notes = "method used to fetch Inward by id")
@@ -65,7 +65,7 @@ public class SupplierController {
 			@ApiResponse(code = 500, message = "internal server error"), @ApiResponse(code = 404, message = "notfound"),
 			@ApiResponse(code = 302, message = "found") })
 
-	@DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@DeleteMapping(value = "/{supplierid}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<Supplier>> deleteInwardById(@PathVariable String supplierid) {
 		return service.deleteInwardById(supplierid);
 	}

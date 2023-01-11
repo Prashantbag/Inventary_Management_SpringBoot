@@ -27,7 +27,7 @@ import lombok.Setter;
 @Entity
 public class Supplier {
 	@Id
-	@GenericGenerator(name = "supplier_Id", strategy = "com.ty.ims.inventory_prject_boot.util.SupCustomIdGenerator")
+	@GenericGenerator(name = "supplier_Id", strategy = "com.ty.ims.inventory_prject_boot.util.Sup_CustomIdGenerator")
 	@GeneratedValue(generator = "supplier_Id")
 	@Column(name = "supplier_Id")
 	private String supplierId;

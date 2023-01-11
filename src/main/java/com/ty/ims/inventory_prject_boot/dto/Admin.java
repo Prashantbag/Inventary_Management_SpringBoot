@@ -25,7 +25,7 @@ import lombok.ToString;
 public class Admin {
 
 	@Id
-	@GenericGenerator(name = "admin_Id", strategy = "com.ty.ims.inventory_prject_boot.util.AdminCustomIdGenerator")
+	@GenericGenerator(name = "admin_Id", strategy = "com.ty.ims.inventory_prject_boot.util.Admin_customIdGenerator")
 	@GeneratedValue(generator = "admin_Id")
 	@Column(name = "admin_Id")
 	private String id;
